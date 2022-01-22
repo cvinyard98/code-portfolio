@@ -122,8 +122,6 @@ bool gameOver(vector< vector<char>> &board, int play){
 		}
 	}
 	return(checkLine(vertical) || checkLine(horizontal) || checkLine(UR) || checkLine(DR) || full);
-	
-
 
 }
 
