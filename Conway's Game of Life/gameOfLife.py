@@ -32,7 +32,7 @@ class gameOfLife(arcade.Window):
         arcade.set_background_color(arcade.color.LIGHT_GRAY)
 
         self.grid_sprite_list = arcade.SpriteList()
-
+        #set up default grid
         for row in range(ROWS):
             for col in range(COLS):
                 x = col * (WIDTH + MARGIN) + (WIDTH / 2 + MARGIN)
@@ -43,7 +43,7 @@ class gameOfLife(arcade.Window):
                 self.grid_sprite_list.append(sprite)
 
     def resync_grid_with_sprites(self):
-
+        #redraw all squares with updated colors
         for row in range(ROWS):
             for col in range(COLS):
                 pos = row * COLS + col
@@ -62,7 +62,7 @@ class gameOfLife(arcade.Window):
         col = int(x // (WIDTH + MARGIN))
         row = int(y // (HEIGHT + MARGIN))
 
-
+    #change colors of square that was clicked
         if row < ROWS and col < COLS:
             if self.grid[row][col] == 0:
                 self.grid[row][col] = 1
@@ -72,7 +72,7 @@ class gameOfLife(arcade.Window):
         self.resync_grid_with_sprites()
 
     def on_key_press(self, symbol: int, modifiers: int):
-
+        #control actions on key press
         if symbol == arcade.key.SPACE:
             self.update_cells()
             self.resync_grid_with_sprites()
@@ -89,14 +89,14 @@ class gameOfLife(arcade.Window):
 
 
     def update_cells(self):
-        
+        #create result grid so I'm not changing the grid underneath itself
         updates_grid = []
         for row in range(ROWS):
             updates_grid.append([])
             for col in range(COLS):
                 updates_grid[row].append(self.grid[row][col]) 
         
-
+        #determines the cell changes to occur after one tick of the clock
         for i in range(ROWS):
             for j in range(COLS):
                 neighbors = [(i-1, j-1), (i-1, j), (i-1, j+1), (i, j-1), (i, j+1), (i+1, j-1), (i+1, j), (i+1, j+1)]
