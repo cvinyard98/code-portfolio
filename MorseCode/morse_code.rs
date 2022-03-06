@@ -2,6 +2,7 @@ use std::collections::HashMap;
 use std::io;
 
 
+//sets up the hash table
 fn setup_morse(morse:&mut HashMap<String, String>){
     morse.insert(String::from(".-"), String::from("a"));
     morse.insert(String::from("-..."), String::from("b"));
@@ -34,6 +35,8 @@ fn setup_morse(morse:&mut HashMap<String, String>){
     morse.insert(String::from("..-.."), String::from(","));
 }
 
+
+//converts letters to morse code
 fn eng_to_morse(line:String, morse:HashMap<String, String>){
     let mut result = String::new();
     
@@ -50,6 +53,8 @@ fn eng_to_morse(line:String, morse:HashMap<String, String>){
     println!("{}", result);
 }
 
+
+//converts morse code to letters
 fn morse_to_eng(line:String, morse:HashMap<String, String>){
     let mut result = String::new();
     let mut temp = String::new();
@@ -73,11 +78,12 @@ fn main() {
     let mut morse = HashMap::new();
     setup_morse(&mut morse);
 
+    //determine which way to translate
     let mut eng_morse = String::new();
     println!("Are you translating from english to morse code (1) or morse code to english(2)?");
     io::stdin().read_line(&mut eng_morse).expect("Error reading input");
     
-    
+    //get user input of what to translate
     let mut line = String::new();
     println!("please enter what you want translated: ");
     io::stdin().read_line(&mut line).expect("Error reading input");
@@ -93,5 +99,3 @@ fn main() {
     }
 
 }
-
-
